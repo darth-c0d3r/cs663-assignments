@@ -5,8 +5,7 @@ function img = b_interpolate_x(image, factor, yjump)
     for right=factor+1:factor:N
       left=right-factor;
       m = (image(i,right)-image(i,left))/factor;
-      intr = (1:(factor-1))*m + image(i,left);
-      img(i,left+1:right-1) = intr;
+      img(i,left+1:right-1) = (1:(factor-1))*m + image(i,left);
     end
   end
 endfunction
