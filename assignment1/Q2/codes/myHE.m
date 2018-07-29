@@ -15,5 +15,4 @@ function myHE(img_name)
     img_out(i,j,k) = cdf(img(i,j,k)+1);
   end
   visualize(img_out);
-  
-endfunction
+end
