@@ -12,4 +12,4 @@ function visualize(img)
   daspect([1 1 1]);
   axis tight;
   colorbar;
-end 
+end

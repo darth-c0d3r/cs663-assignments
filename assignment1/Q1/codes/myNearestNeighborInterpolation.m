@@ -18,4 +18,4 @@ function myNearestNeighborInterpolation(factor_r, factor_c)
     end
   end
   visualize(img_out);
-endfunction
+end

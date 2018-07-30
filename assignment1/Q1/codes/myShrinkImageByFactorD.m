@@ -5,4 +5,4 @@ function myShrinkImageByFactorD(d)
   img_out = img(d:d:w, d:d:h);
   visualize(img_out);
   % Remember to save images later on for d=2,3.
-endfunction
+end

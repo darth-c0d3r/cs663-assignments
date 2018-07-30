@@ -23,7 +23,7 @@ function myHM(img_name, img_ref_name)
     hist_ref(b+1) = a;
     cdf_ref = cumsum(hist_ref);
     cdf_ref = cdf_ref/cdf_ref(256);
-    cdf_inv = icdf(cdf_ref, cdf(:));
+    cdf_inv = icdf(cdf_ref, cdf(:))
     
     img_out(i,j,k) = cdf_inv(img(i,j,k)+1);
   end

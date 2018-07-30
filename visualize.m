@@ -1,10 +1,10 @@
 % A function to display final formatted image as per instructions.
-function visualize(img, bnw=1)
+function visualize(img)
   myNumOfColors = 200;
   myColorScale = [[0:1/(myNumOfColors-1):1]',[0:1/(myNumOfColors-1):1]',[0:1/(myNumOfColors-1):1]'];
-  imagesc(img);
+  figure, imagesc(img);
   colormap(myColorScale);
-  if bnw == 0
+  if length(size(img))==3
     colormap jet;
   else
     colormap gray;
@@ -12,4 +12,4 @@ function visualize(img, bnw=1)
   daspect([1 1 1]);
   axis tight;
   colorbar;
-endfunction  
+end

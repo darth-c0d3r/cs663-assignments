@@ -1,5 +1,6 @@
-function histgm = myAHE_helper(img)
-  [w,h] = size(img);
+% returns histogram for a component of the image
+function histgm = myAHE_helper(img_comp)
+  [w,h] = size(img_comp);
   i=1:w;
   j=1:h;
   x = reshape(img(i,j), 1, w*h);

@@ -6,4 +6,4 @@ function img = b_interpolate_x(image, factor, yjump)
     left=right-factor;
     img(i_rng,left:right) = linspace(image(i_rng,left), image(i_rng,right), factor+1);
   end
-endfunction
+end

@@ -9,4 +9,4 @@ function myBilinearInterpolation(factor_r, factor_c)
   img_out = b_interpolate_x(img_out, factor_c, factor_r);
   img_out = b_interpolate_x(img_out', factor_r, 1)';
   visualize(img_out);
-endfunction
+end
