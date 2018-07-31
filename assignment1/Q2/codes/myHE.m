@@ -6,10 +6,8 @@ function myHE(img_name)
   j=1:h;
   
   for k=1:d
-    hist_ = zeros(1,256);
     x = reshape(img(i,j,k), 1, w*h);
-    [a,b] = hist(x, unique(x)); 
-    hist_(b+1) = a;
+    hist_ = histc(x, 0:255);
     cdf = cumsum(hist_);
     cdf = (cdf/cdf(256))*255;
     img_out(i,j,k) = cdf(img(i,j,k)+1);

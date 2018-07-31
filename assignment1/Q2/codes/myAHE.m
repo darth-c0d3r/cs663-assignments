@@ -1,6 +1,6 @@
 function myAHE(img_name, n)
   img = imread(img_name);
-  [w,h,d] = size(img);
+  [w,h,~] = size(img);
   sz = ceil((n-1)/2);
 
   mod_img(sz+1:w+sz,sz+1:h+sz,:) = img(:,:,:);
