@@ -11,6 +11,6 @@ function visualize(img)
   end
   daspect([1 1 1]);
   axis tight;
-  caxis([0 255]);
+  caxis([0 myNumOfColors]);
   colorbar;
 end
