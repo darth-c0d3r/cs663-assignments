@@ -17,6 +17,8 @@ function myAHE(img_name, n)
   [w,h,d] = size(img);
   img_out = img;
   rng_j = 1:(h-n);
+  
+  % iterate over all channels
   for k=1:d
     flag = 0;
      hist_gm = myAHE_helper(img(1:n,1:n,k));

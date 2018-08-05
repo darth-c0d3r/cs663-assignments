@@ -1,5 +1,5 @@
 function myHM()
-  
+% apply histogram matching on img with respect to img_ref 
   img = imread('../data/retina.png');
   img_ref = imread('../data/retinaRef.png');
   mask = imread('../data/retinaMask.png');
@@ -12,13 +12,15 @@ function myHM()
   i=1:w;
   j=1:h;
   
+  % iterate over all channels  
   for k=1:d
       
     x = img_ref(:,:,k);
-    x(refmask == 0) = -1;
+    x(refmask == 0) = -1; % set background pixels=-1
     x = reshape(img(:,:,k), 1, w*h);
     hist_img = histc(x, -1:255);
-    hist_img = hist_img(2:257);
+    hist_img = hist_img(2:257); % choose histogram for foreground only
+
     cdf = cumsum(hist_img);
     cdf = cdf/cdf(256);
     
@@ -32,6 +34,7 @@ function myHM()
     
     cdf_inv = zeros(1,256);
     for l=1:256
+        % get cdf_inverse for discrete variable
         [~,cdf_inv(1,l)]=min(abs(cdf_ref-cdf(1,l)));
     end
     

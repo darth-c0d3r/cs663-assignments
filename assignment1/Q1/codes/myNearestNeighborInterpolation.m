@@ -1,9 +1,12 @@
 function myNearestNeighborInterpolation(factor_r, factor_c)
+% apply neares-neighbor interpolation inserting factor_r 
+% pixels per pixel row-wise and factor_c per pixel column-wise. 
   img_name = '../data/barbaraSmall.png';
   img = imread(img_name);
   [M,N] = size(img);
   img_out = zeros(factor_r*(M-1)+1,factor_c*(N-1)+1);
 
+  % range of influence around every pixel
   rng_r = ceil((factor_r-1)/2);
   rng_c = ceil((factor_c-1)/2);
   for i = 1:M

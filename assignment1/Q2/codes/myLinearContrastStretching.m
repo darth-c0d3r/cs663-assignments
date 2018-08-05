@@ -1,8 +1,10 @@
 function myLinearContrastStretching(img_name)
+% apply linear contrast stretching on an image
   img = imread(img_name);
   [w,h,d] = size(img);
   img_out = img;
   
+  % iterate over all channels
   for k=1:d
       max_n = max(max(img(:,:,k)));
       min_n = min(min(img(:,:,k)));

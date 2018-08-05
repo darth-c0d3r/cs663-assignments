@@ -1,4 +1,6 @@
 function img = b_interpolate_x(image, factor, yjump)
+% apply row-wise bi-linear interpolation on every yjump_th row
+% factor is the number of pixels to insert between two pixels
   [M,N] = size(image);
   img = image;
   i_rng = 1:yjump:M;
