@@ -1,11 +1,11 @@
-function ourAHE(img_name, n)
+function ourCLAHE(img_name, n, free_p)
   img = imread(img_name);
   [w,h,d] = size(img);
   img_out = img;
+  tic
   sz = ceil((n-1)/2);
   lextra = 1:n-sz;
   rextra = (h-sz):h;
-  tic
   for k=1:d
       rng_y = 1:h;
       flag = 0;
@@ -13,6 +13,12 @@ function ourAHE(img_name, n)
       for i=1:w
           rng_x = max(1,i-sz):min(w,i+n-1-sz);
           cdf = cumsum(hist_gm);
+          threshold = free_p*cdf(256);
+          hist_mod = hist_gm;
+          hist_mod(hist_gm > threshold) = threshold;
+          diff = sum(hist_gm-hist_mod);
+          hist_mod = hist_mod + diff/256;
+          cdf = cumsum(hist_mod);
           cdf = (cdf/cdf(256))*255;
           img_out(i,rng_y(1),k) = cdf(img(i,rng_y(1),k)+1);
           for j=rng_y(2:h)
@@ -32,6 +38,12 @@ function ourAHE(img_name, n)
                   end
               end    
               cdf = cumsum(hist_gm);
+              threshold = free_p*cdf(256);
+              hist_mod = hist_gm;
+              hist_mod(hist_gm > threshold) = threshold;
+              diff = sum(hist_gm-hist_mod);
+              hist_mod = hist_mod + diff/256;
+              cdf = cumsum(hist_mod);
               cdf = (cdf/cdf(256))*255;
               img_out(i,j,k) = cdf(img(i,j,k)+1); 
           end
@@ -53,7 +65,7 @@ function ourAHE(img_name, n)
           flag = 1-flag;
       end    
   end
-  visualize(img_out);
   time_elapsed = toc;
   time_elapsed
+  visualize(img_out);
 end

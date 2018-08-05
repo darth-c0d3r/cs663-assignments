@@ -1,6 +1,6 @@
 function myHE(img_name)
 % apply histogram equalization on a given image
-  img = imread(img_name);
+  [img, map] = imread(img_name);
   [w,h,d] = size(img);
   img_out = img;
   i=1:w;
@@ -14,6 +14,14 @@ function myHE(img_name)
     cdf = (cdf/cdf(256))*255;
     img_out(i,j,k) = cdf(img(i,j,k)+1);
   end
-  visualize(img_out);
+  
+  iptsetpref('ImshowAxesVisible','on');
+  figure('units','normalized','outerposition',[0 0 1 1])
+  subplot(1,2,1);
+  imshow(img, map), colorbar;
+  title('Original Image')
+  subplot(1,2,2);
+  imshow(img_out, map), colorbar;
+  title('Historgram Equalized Image')
   
 end

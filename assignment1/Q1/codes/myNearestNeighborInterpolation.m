@@ -1,8 +1,10 @@
-function myNearestNeighborInterpolation(factor_r, factor_c)
+function myNearestNeighborInterpolation()
 % apply neares-neighbor interpolation inserting factor_r 
 % pixels per pixel row-wise and factor_c per pixel column-wise. 
+  factor_r=3;
+  factor_c=2;
   img_name = '../data/barbaraSmall.png';
-  img = imread(img_name);
+  [img, map] = imread(img_name);
   [M,N] = size(img);
   img_out = zeros(factor_r*(M-1)+1,factor_c*(N-1)+1);
 
@@ -20,5 +22,13 @@ function myNearestNeighborInterpolation(factor_r, factor_c)
       img_out(ymin:ymax,xmin:xmax)=img(i,j);
     end
   end
-  visualize(img_out);
+  
+  iptsetpref('ImshowAxesVisible','on');
+  figure('units','normalized','outerposition',[0 0 1 1])
+  subplot(1,2,1);
+  imshow(img, map), colorbar;
+  title('Original Image')
+  subplot(1,2,2);
+  imshow(img_out, map), colorbar;
+  title('Enlarged Image')
 end
