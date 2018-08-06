@@ -1,3 +1,7 @@
+%% Histogram Matching
+% Observation : The output image that we get seems to be much better than the input dull image (retina.png). The reason for this is that histogram matching involves calculating the cdf of the reference image and then matching the input image to its calculated cdf. And since the histogram of the reference image is much better distributed, when it is matched upon the input image the output that we get is much better.
+
+%% Function
 function myHM()
 % apply histogram matching on img with respect to img_ref 
   [img, map1] = imread('../data/retina.png');
@@ -13,7 +17,7 @@ function myHM()
   i=1:w;
   j=1:h;
   
-  % iterate over all channels  
+  %% Iterating over all channels  
   for k=1:d
       
     x = img(:,:,k);

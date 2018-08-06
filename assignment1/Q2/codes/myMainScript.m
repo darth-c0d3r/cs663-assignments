@@ -1,44 +1,38 @@
 %% MyMainScript
 
 tic;
-% myLinearContrastStretching('../data/barbara.png');
-% myLinearContrastStretching('../data/TEM.png');
-% myLinearContrastStretching('../data/canyon.png');
-% myLinearContrastStretching('../data/church.png');
-% myHE('../data/barbara.png');
-% myHE('../data/TEM.png');
-% myHE('../data/canyon.png');
-% myHE('../data/church.png');
-% myHM();
-% myAHE('../data/barbara.png', 10);
-% myAHE('../data/barbara.png', 100);
-% myAHE('../data/barbara.png', 200);
-% myAHE('../data/barbara.png', 300); % optimal
+myLinearContrastStretching('../data/barbara.png');
+myLinearContrastStretching('../data/TEM.png');
+myLinearContrastStretching('../data/canyon.png');
+myLinearContrastStretching('../data/church.png');
+myHE('../data/barbara.png');
+myHE('../data/TEM.png');
+myHE('../data/canyon.png');
+myHE('../data/church.png');
+myHM();
+myAHE('../data/barbara.png', 20);
+myAHE('../data/barbara.png', 300); % optimal
 myAHE('../data/barbara.png', 600);
-% myAHE('../data/TEM.png', 10);
-% myAHE('../data/TEM.png', 50);
-% myAHE('../data/TEM.png', 200); % optimal 
-% myAHE('../data/TEM.png', 300);
-% myAHE('../data/TEM.png', 500);
-% myAHE('../data/canyon.png', 10);
-% myAHE('../data/canyon.png', 100);
-% myAHE('../data/canyon.png', 200);
-% myAHE('../data/canyon.png', 400); % optimal
-% myAHE('../data/canyon.png', 600);
-% myCLAHE('../data/barbara.png', 25, 0.02);
-% myCLAHE('../data/barbara.png', 300, 0.1); % optimal 
-% myCLAHE('../data/barbara.png', 500, 0.1);
-% myCLAHE('../data/barbara.png', 300, 0.05);
-% myCLAHE('../data/barbara.png', 500, 0.05);
-myCLAHE('../data/TEM.png', 10);
-myCLAHE('../data/TEM.png', 50);
-myCLAHE('../data/TEM.png', 150);
-myCLAHE('../data/TEM.png', 300);
-myCLAHE('../data/TEM.png', 500);
-% myCLAHE('../data/canyon.png', 10);
-% myCLAHE('../data/canyon.png', 100);
-% myCLAHE('../data/canyon.png', 200);
-% myCLAHE('../data/canyon.png', 400);
-% myCLAHE('../data/canyon.png', 600);
+myAHE('../data/TEM.png', 30);
+myAHE('../data/TEM.png', 300); % optimal 
+myAHE('../data/TEM.png', 700);
+myAHE('../data/canyon.png', 20);
+myAHE('../data/canyon.png', 400); % optimal
+myAHE('../data/canyon.png', 600);
+m
+myCLAHE('../data/barbara.png', 300, 0.06); % optimal 
+myCLAHE('../data/barbara.png', 600, 0.06);
+myCLAHE('../data/barbara.png', 300, 0.03);
+myCLAHE('../data/barbara.png', 600, 0.03);
+myCLAHE('../data/TEM.png', 30, 0.05);
+myCLAHE('../data/TEM.png', 300, 0.1); % optimal
+myCLAHE('../data/TEM.png', 700, 0.1);
+myCLAHE('../data/TEM.png', 300, 0.05);
+myCLAHE('../data/TEM.png', 700, 0.05);
+myCLAHE('../data/canyon.png', 20, 0.1);
+myCLAHE('../data/canyon.png', 400, 0.08); % optimal
+myCLAHE('../data/canyon.png', 600, 0.08);
+myCLAHE('../data/canyon.png', 400, 0.04);
+myCLAHE('../data/canyon.png', 600, 0.04);
 
 toc;

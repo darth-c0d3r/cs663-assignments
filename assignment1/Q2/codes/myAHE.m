@@ -1,11 +1,27 @@
+%% Adaptive Histogram Equaliztion
+
+%% Function
 function myAHE(img_name, n)
   [img, map] = imread(img_name);
+  % fetch dimensions
   [w,h,d] = size(img);
   img_out = img;
   sz = ceil((n-1)/2);
+  % helper vectors for efficient computation
   lextra = 1:n-sz;
   rextra = (h-sz):h;
-  for k=1:d
+      
+  %% Efficient implementation
+  % We iterate from left to right and top to bottom over centres of all
+  % windows. First, the histogram for the top-left corner pixel is
+  % computed according to the window-size. Along a row, we slide the
+  % window to the left or right depending upon 'flag',
+  % adding/subtracting column-strips to compute the subsequent histogram
+  % efficiently. Similarly, for the next row, the histogram is computed
+  % by adding/subtracting a row-strips, while taking care of corner
+  % cases.
+  % Iteration over all channels
+  for k=1:d     
       rng_y = 1:h;
       flag = 0;
       hist_gm = myAHE_helper(img(1:n-sz,1:n-sz,k));
@@ -60,5 +76,5 @@ function myAHE(img_name, n)
   title('Original Image');
   subplot(1,2,2);
   imshow(img_out, map), colorbar;
-  title('AHE Image');
+  title(['AHE Image ' num2str(n)]);
 end

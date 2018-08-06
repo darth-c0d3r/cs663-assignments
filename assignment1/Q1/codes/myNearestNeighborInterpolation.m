@@ -1,3 +1,6 @@
+%% Nearest Neighbor Interpolation
+
+%% Function
 function myNearestNeighborInterpolation()
 % apply neares-neighbor interpolation inserting factor_r 
 % pixels per pixel row-wise and factor_c per pixel column-wise. 

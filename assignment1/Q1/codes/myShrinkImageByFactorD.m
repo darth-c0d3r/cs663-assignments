@@ -1,5 +1,8 @@
+%% Shrink Image by Factor 'd'
+% Shrink a given image by factor of d, evenly in both dimensions
+
+%% Function
 function myShrinkImageByFactorD()
-% shrink a given image by factor of d, evenly in both dimensions
   d1 = 2;
   d2 = 3;
   img_name = '../data/circles_concentric.png';

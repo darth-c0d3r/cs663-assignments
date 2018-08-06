@@ -1,5 +1,12 @@
-%% Linear Contrast Stretching Function
+%% Linear Contrast Stretching
+% Observation : For image (5) the output that we get is not much contrasted as is required. Hence, linear contrast stretching isn't effective in this case. The reason for this is that linear contrast stretching maps the minimum value of the pixels of image to 0 and the maximum value to 255 and spreads all the internal pixels linerly between them. However for this image the minimum and maximum values of pixels (for every color) vary from 0 to 255 itself, hence negligible spreading is achieved.
+
+%% Formula for Linear Function
+% for every color $i$ with intensity $x_i$
 % 
+% $x_i=(x_i-min)*255/(max-min)$
+
+%% Function
 function myLinearContrastStretching(img_name)
   [img, map] = imread(img_name);
   [~,~,d] = size(img);

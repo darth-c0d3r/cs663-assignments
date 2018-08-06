@@ -1,11 +1,29 @@
+%% Contrast Limited Adaptive Histogram Equaliztion
+
+%% Function
 function myCLAHE(img_name, n, free_p)
+% applies contrast limited adaptive histogram equalization on an image
   [img, map] = imread(img_name);
-  [w,h,d] = size(img);
+  % fetch dimensions
+  [w,h,d] = size(img); 
   img_out = img;
-  tic
   sz = ceil((n-1)/2);
+  % helper vectors for efficient computation
   lextra = 1:n-sz;
   rextra = (h-sz):h;
+  
+  
+  %% Efficient implementation
+  % We iterate from left to right and top to bottom over centres of all
+  % windows. First, the histogram for the top-left corner pixel is
+  % computed according to the window-size. Along a row, we slide the
+  % window to the left or right depending upon 'flag',
+  % adding/subtracting column-strips to compute the subsequent histogram
+  % efficiently. Similarly, for the next row, the histogram is computed
+  % by adding/subtracting a row-strips, while taking care of corner
+  % cases. Then the threshold is computed according to the parameter
+  % 'free_p'.
+  % Iteration over all channels
   for k=1:d
       rng_y = 1:h;
       flag = 0;

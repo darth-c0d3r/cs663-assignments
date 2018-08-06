@@ -1,3 +1,6 @@
+%% Bilinear Interpolation
+
+%% Function
 function myBilinearInterpolation()
 % apply bilinear interpolation inserting factor_r pixels per pixel 
 % row-wise and factor_c per pixel column-wise. 
