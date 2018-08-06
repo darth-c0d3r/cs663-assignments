@@ -1,18 +1,27 @@
+%% Linear Contrast Stretching Function
+% 
 function myLinearContrastStretching(img_name)
-% apply linear contrast stretching on an image
-  img = imread(img_name);
-  [w,h,d] = size(img);
+  [img, map] = imread(img_name);
+  [~,~,d] = size(img);
   img_out = img;
   
-  % iterate over all channels
+%% Iterating over all channels
   for k=1:d
       max_n = max(max(img(:,:,k)));
       min_n = min(min(img(:,:,k)));
-      disp(max_n);
-      disp(min_n);
       if max_n ~= min_n
           img_out(:,:,k) = (img(:,:,k)-min_n)*(255/(max_n-min_n));
       end
   end
-  visualize(img_out);
+  
+  iptsetpref('ImshowAxesVisible','on');
+  figure('units','normalized','outerposition',[0 0 1 1]);
+  subplot(1,2,1);
+  imshow(img, map), colorbar;
+  title('Original Image');
+  subplot(1,2,2);
+  imshow(img_out, map), colorbar;
+  title('Contrast Stretched Image');
+
+  
 end

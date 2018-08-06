@@ -1,5 +1,5 @@
-function ourCLAHE(img_name, n, free_p)
-  img = imread(img_name);
+function myCLAHE(img_name, n, free_p)
+  [img, map] = imread(img_name);
   [w,h,d] = size(img);
   img_out = img;
   tic
@@ -9,7 +9,7 @@ function ourCLAHE(img_name, n, free_p)
   for k=1:d
       rng_y = 1:h;
       flag = 0;
-      hist_gm = ourAHE_helper(img(1:n-sz,1:n-sz,k));
+      hist_gm = myAHE_helper(img(1:n-sz,1:n-sz,k));
       for i=1:w
           rng_x = max(1,i-sz):min(w,i+n-1-sz);
           cdf = cumsum(hist_gm);
@@ -24,17 +24,17 @@ function ourCLAHE(img_name, n, free_p)
           for j=rng_y(2:h)
               if flag == 0
                   if j-sz > 1
-                      hist_gm = hist_gm - ourAHE_helper(img(rng_x,j-sz-1,k));
+                      hist_gm = hist_gm - myAHE_helper(img(rng_x,j-sz-1,k));
                   end
                   if j+n-1-sz <= h
-                      hist_gm = hist_gm + ourAHE_helper(img(rng_x,j+n-1-sz,k));
+                      hist_gm = hist_gm + myAHE_helper(img(rng_x,j+n-1-sz,k));
                   end
               else
                   if j-sz >= 1
-                      hist_gm = hist_gm + ourAHE_helper(img(rng_x,j-sz,k));
+                      hist_gm = hist_gm + myAHE_helper(img(rng_x,j-sz,k));
                   end
                   if j+n-sz <= h
-                      hist_gm = hist_gm - ourAHE_helper(img(rng_x,j+n-sz,k));
+                      hist_gm = hist_gm - myAHE_helper(img(rng_x,j+n-sz,k));
                   end
               end    
               cdf = cumsum(hist_gm);
@@ -55,17 +55,23 @@ function ourCLAHE(img_name, n, free_p)
           end
           
           if i-sz > 1
-              hist_gm = hist_gm - ourAHE_helper(img(i-sz-1,extra,k));
+              hist_gm = hist_gm - myAHE_helper(img(i-sz-1,extra,k));
           end
           if i+n-1-sz <= w
-              hist_gm = hist_gm + ourAHE_helper(img(i+n-1-sz,extra,k));
+              hist_gm = hist_gm + myAHE_helper(img(i+n-1-sz,extra,k));
           end
           
           rng_y = fliplr(rng_y);
           flag = 1-flag;
       end    
   end
-  time_elapsed = toc;
-  time_elapsed
-  visualize(img_out);
+  
+  iptsetpref('ImshowAxesVisible','on');
+  figure('units','normalized','outerposition',[0 0 1 1]);
+  subplot(1,2,1);
+  imshow(img, map), colorbar;
+  title('Original Image');
+  subplot(1,2,2);
+  imshow(img_out, map), colorbar;
+  title(['CLAHE Image ' num2str(n) ' , ' num2str(free_p)]);
 end

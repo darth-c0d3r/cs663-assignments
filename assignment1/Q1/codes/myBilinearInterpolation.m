@@ -25,6 +25,6 @@ function myBilinearInterpolation()
   title('Original Image')
   subplot(1,2,2);
   imshow(img_out, map), colorbar;
-  title('Enlarged Image')
+  title('Enlarged Image using Bilinear Interpolation');
   
 end
