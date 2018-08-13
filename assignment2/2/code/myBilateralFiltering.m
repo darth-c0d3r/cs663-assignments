@@ -2,8 +2,8 @@ function myBilateralFiltering(img_name)
     
 %     parameters
     k_size = 5;
-    sigma_space = 10;
-    sigma_intensity = 10;
+    sigma_space = 1;
+    sigma_intensity = 1;
     
     image_struct = load(img_name);
     img = image_struct.imageOrig;
@@ -26,4 +26,11 @@ function myBilateralFiltering(img_name)
     end
     figure, imshow(mat2gray(img_out));
     figure, imshow(mat2gray(img_noisy));
+    
+    rmsd = (img - img_out);
+    rmsd = sqrt((sum(sum(rmsd.*rmsd)))/(h*w));
+    disp(rmsd);
+%     rmsd = (img - img_noisy);
+%     rmsd = sqrt((sum(sum(rmsd.*rmsd)))/(h*w));
+%     disp(rmsd);
 end
