@@ -1,21 +1,10 @@
-function myPatchBasedFiltering(img_name, par)
-    image_struct = load(img_name);
-    img = image_struct.imageOrig;
-    [h, w] = size(img);
+function myPatchBasedFiltering(img_real, img_noisy, par)
+    [h, w] = size(img_noisy);
     f = @(X) myPatchHelper(X, par);
-    img_out = nlfilter(img, [33 33], f);
-% <<<<<<< HEAD
-%     figure
-%     colormap gray;
-%     imagesc(img_out);
-%     rmsd = (img - img_out);
-%     rmsd = sqrt((sum(sum(rmsd.^2)))/(h*w));
-%     disp(rmsd);
-% end
-% =======
-    figure, imshow(img_out);
-    rmsd = (img - img_out);
-    rmsd = sqrt((sum(sum(rmsd.^2)))/(h*w));
+    img_out = nlfilter(img_noisy, [33 33], f);
+    rmsd = sqrt((sum(sum((img_real-img_out).^2)))/(h*w));
     disp(rmsd);
+    figure
+    colormap gray;
+    imagesc(img_out);
 end
-% >>>>>>> e3a4e45e7a82db793f4e0219e302c659c75e7f04
