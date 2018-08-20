@@ -2,35 +2,46 @@
 
 tic;
 %% Your code here
-sigma_s = 1.25;
-sigma_i = 0.1;
+
 
 % %  barbara
 img_name = '../data/barbara.mat';
 image_struct = load(img_name);
 img = image_struct.imageOrig;
+
+% % grass
+% img = im2double(imread('../data/grass.png'));
+
+% % honeycomb
+% img = im2double(imread('../data/honeyCombReal.png'));
+
 [h, w] = size(img);
 noise = randn(h,w)*(max(max(img))-min(min(img)))*0.05;
 img_noisy = img+noise;
 
-% % grass
-% img_struct = load('../data/grassNoisy.mat');
-% img_noisy = im2double(img_struct.imgCorrupt);
-% img = im2double(imread('../data/grass.png'));
+sigma_space = 2.0;
+sigma_inten = 9.0;
 
-% % honeycomb
-% img_struct = load('../data/honeyCombReal_Noisy.mat');
-% img_noisy = im2double(img_struct.imgCorrupt);
-% img = im2double(imread('../data/honeyCombReal.png'));
+space = [1.0, 0.9, 1.1, 1.0, 1.0];
+inten = [1.0, 1.0, 0.9, 0.9, 1.1];
 
+iptsetpref('ImshowAxesVisible','on');
+figure;
+imshow(mat2gray(img)), colorbar;
+title('Input Image');
+figure;
+imshow(mat2gray(img_noisy)), colorbar;
+title('Noisy Image');
 
-rmsd = zeros(1,1);
-for s = sigma_s
-    disp(s);
-    for i = sigma_i
-        rmsd(1,1) = myBilateralFiltering(img, img_noisy, s, i);
-%         disp(rmsd(s,i));
-    end
+for i=1:5
+    s_sd = space(1,i)*sigma_space;
+    i_sd = inten(1,i)*sigma_inten;
+    [img_out, rmsd] = myBilateralFiltering(img, img_noisy, s_sd, i_sd);
+    
+    figure;
+    imshow(mat2gray(img_out)), colorbar;
+    title(strcat(['Filtered Image, ', num2str(space(1,i), ' ']));
+    disp(rmsd);
 end
-% disp(rmsd);
+
 toc;
