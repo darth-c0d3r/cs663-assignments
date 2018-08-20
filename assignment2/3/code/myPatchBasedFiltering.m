@@ -1,4 +1,5 @@
 function myPatchBasedFiltering(img_real, img_noisy, par)
+    tic;
     [h, w] = size(img_noisy);
     f = @(X) myPatchHelper(X, par);
     img_out = nlfilter(img_noisy, [33 33], f);
@@ -7,4 +8,5 @@ function myPatchBasedFiltering(img_real, img_noisy, par)
     figure
     colormap gray;
     imagesc(img_out);
+    toc;
 end

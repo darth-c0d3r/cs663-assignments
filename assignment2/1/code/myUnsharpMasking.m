@@ -5,7 +5,7 @@ function [imgOutput] = myUnsharpMasking(img_in, scale, radius)
 
     imgInput = mat2gray(myLinearContrastStretching(mat2gray(imgIn)));
     
-    gaussian = fspecial('gaussian', [15,15], radius);
+    gaussian = fspecial('gaussian', [5,5], radius);
     img_blurred = imfilter(imgIn, gaussian, 'conv');
     output_mat = imgIn + scale*(imgIn - img_blurred);
     imgOutput = mat2gray(myLinearContrastStretching(mat2gray(output_mat)));

@@ -9,20 +9,24 @@ tic;
 % imgStruct = load('../data/grassNoisy.mat');
 % img_noisy = im2double(imgStruct.imgCorrupt);
 
-imgStruct = load('../data/barbara.mat');
-img = imgStruct.imageOrig;
+% imgStruct = load('../data/barbara.mat');
+% img = imgStruct.imageOrig;
+img = im2double(imread('../data/honeyCombReal.png'));
 [h,w] = size(img);
 noise = randn(h,w)*(max(max(img))-min(min(img)))*0.05;
 img_real = im2double(img);
 img_noisy = im2double(img+noise);
 
-var_par = 1:1:10;
+g_filter = fspecial('gaussian', 9, 2);
+
+var_par = 0.7:0.05:1.1;
 for par = var_par
     myPatchBasedFiltering(img_real,img_noisy,par);
-    toc;
 end    
     
+toc;
 % 0.84 for grassNoisy
 % 0.9 for honeyComb
+% 87 for barbara
 
 toc;
