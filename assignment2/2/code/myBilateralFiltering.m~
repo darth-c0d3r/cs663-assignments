@@ -4,6 +4,8 @@ function rmsd = myBilateralFiltering(img, img_noisy, sigma_space, sigma_intensit
     k_size = 11;
 %     sigma_space = 5.0;
 %     sigma_intensity = 10.0;
+    image_struct = load(img_name);
+    img = image_struct.imageOrig;
     [h, w] = size(img);
     
     space_filter = fspecial('gaussian', k_size, sigma_space);
@@ -26,8 +28,8 @@ function rmsd = myBilateralFiltering(img, img_noisy, sigma_space, sigma_intensit
             img_out(i,j) = sum(sum(filter .* im_part));
         end
     end
-    figure, imshow(mat2gray(img_out));
-    figure, imshow(mat2gray(img_noisy));
+%     figure, imshow(mat2gray(img_out));
+%     figure, imshow(mat2gray(img_noisy));
 %     iptsetpref('ImshowAxesVisible','on');
 %     figure('units','normalized','outerposition',[0 0 1 1])
 %     subplot(1,3,1);
@@ -41,12 +43,7 @@ function rmsd = myBilateralFiltering(img, img_noisy, sigma_space, sigma_intensit
 %     title('Filtered Image')
      
 %     rmsd calculation
-%     corrected image
     rmsd = (img - img_out);
     rmsd = sqrt((sum(sum(rmsd.^2)))/(h*w));
-    disp(rmsd);
-%     noisy image
-    rmsd = (img - img_noisy);
-    rmsd = sqrt((sum(sum(rmsd.^2)))/(h*w));
-    disp(rmsd);
+%     disp(rmsd);
 end
