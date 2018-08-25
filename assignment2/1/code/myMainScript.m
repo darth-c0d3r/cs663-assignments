@@ -1,4 +1,3 @@
-
 %% MyMainScript
 
 tic;
