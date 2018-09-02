@@ -1,4 +1,4 @@
-function myHarrisCornerDetector(img_name, sigma_smooth, sigma_wt, k)
+function myHarrisCornerDetector(img_name, sigma_smooth, sigma_wt, patch_size, k)
     imgStruct = load(img_name);
     img = mat2gray(imgStruct.imageOrig);
     img = imgaussfilt(img, sigma_smooth);
@@ -20,15 +20,16 @@ function myHarrisCornerDetector(img_name, sigma_smooth, sigma_wt, k)
     My = Iy.*Iy;
     Mxy = Ix.*Iy;
     
-    g_filter = fspecial('gaussian',3, sigma_wt);
+    g_filter = fspecial('gaussian',patch_size, sigma_wt);
     E1 = zeros(h,w);
     E2 = zeros(h,w);
     R = zeros(h,w);
+    sz = (patch_size-1)/2;
     for i=2:h-1
         for j=2:w-1
-            m11 = sum(sum(Mx(i-1:i+1,j-1:j+1).*g_filter));
-            m12 = sum(sum(Mxy(i-1:i+1,j-1:j+1).*g_filter));
-            m22 = sum(sum(My(i-1:i+1,j-1:j+1).*g_filter));
+            m11 = sum(sum(Mx(i-sz:i+sz,j-sz:j+sz).*g_filter));
+            m12 = sum(sum(Mxy(i-sz:i+sz,j-sz:j+sz).*g_filter));
+            m22 = sum(sum(My(i-sz:i+sz,j-sz:j+sz).*g_filter));
             M = [m11 m12; m12 m22];
             E = eig(M);
             E1(i,j) = min(E);
@@ -37,12 +38,6 @@ function myHarrisCornerDetector(img_name, sigma_smooth, sigma_wt, k)
         end
     end
     
-    disp(min(min(E1)));
-    disp(max(max(E1)));
-    disp(mean(mean(E1)));
-    disp(min(min(E2)));
-    disp(max(max(E2)));
-    disp(mean(mean(E2)));
 %     figure;
 %     subplot(1,2,1);
 %     imshow(mat2gray(E1));
