@@ -1,5 +1,6 @@
-function myMeanShiftSegmentation(filename, hr, hs, num_iter, num_neighbours)
+function myMeanShiftSegmentation(hr, hs, num_iter, num_neighbours)
 	
+    filename = '../data/baboonColor.png';
 	img_in = imread(filename);
 	img = imgaussfilt(img_in, 1);
 	img = imresize(img, 0.5);
@@ -45,6 +46,6 @@ function myMeanShiftSegmentation(filename, hr, hs, num_iter, num_neighbours)
 
 	subplot(1,2,2);
 	imshow(img_out);
-	title(['hr = ' num2str(hr) ' || hs = ' num2str(hs)])
+	title(['hr = ' num2str(hr) ' || hs = ' num2str(hs) ' || neigbour = ' num2str(num_neighbours) ' || iter = ' num2str(num_iter)]);
 
 end
