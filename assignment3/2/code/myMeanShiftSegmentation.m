@@ -46,6 +46,5 @@ function myMeanShiftSegmentation(hr, hs, num_iter, num_neighbours)
 
 	subplot(1,2,2);
 	imshow(img_out);
-	title(['hr = ' num2str(hr) ' || hs = ' num2str(hs) ' || neigbour = ' num2str(num_neighbours) ' || iter = ' num2str(num_iter)]);
-
+	title(['Segmented Image (hr = ' num2str(hr) ' || hs = ' num2str(hs) ')'])
 end
