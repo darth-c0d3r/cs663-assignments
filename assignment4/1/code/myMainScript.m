@@ -7,8 +7,8 @@ tic;
 eigORL(ORL_train, ORL_test);
 svdORL(ORL_train, ORL_test);
 
-% [Yale_train, Yale_test] = getYale('../images/CroppedYale');
-% svdYale(Yale_train, Yale_test);
+[Yale_train, Yale_test, Yale_train_label, Yale_test_label] = getYale('../images/CroppedYale');
+svdYale(Yale_train, Yale_test, Yale_train_label, Yale_test_label);
 
 toc;
 
@@ -36,9 +36,11 @@ function [train, test] = getORL(path)
     test = test - X_mean;
 end
 
-function [train, test] = getYale(path)
+function [train, test, train_label, test_label] = getYale(path)
     train = [];
     test = [];
+    train_label = [];
+    test_label = [];
     PATH = dir(path);
     for i=3:size(PATH,1)
         folder = strcat(path,'/',PATH(i).name);
@@ -50,8 +52,10 @@ function [train, test] = getYale(path)
             col = double(reshape(img',r*c,1));
             if idx < 43
                 train = [train col];
+                train_label = [train_label i];
             else
                 test = [test col];
+                test_label = [test_label i];    
             end    
         end
     end

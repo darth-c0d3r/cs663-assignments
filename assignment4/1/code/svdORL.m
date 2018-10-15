@@ -1,5 +1,5 @@
 function svdORL(X_train, X_test)
-    [W, ~, ~] = svd(X_train);
+    [W, ~, ~] = svd(X_train,0);
     rate = [];
     for k = [1,2,3,5,10,15,20,30,50,75,100,150,170]
         V = W(:,1:k);
