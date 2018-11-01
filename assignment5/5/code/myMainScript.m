@@ -19,7 +19,8 @@ rmse_PCADenoising2 = myPCADenoising2(im, im1, patch_size, sigma, 0)
 
 % Also using KNN for eigenspace ensures that the mean squared alpha is
 % close to the true value. Hence, better image restoration as is observed.
-[im2, rmse_BilateralFiltered] = myBilateralFiltering(im, im1, sigma, sigma_intensity)
+[im2, rmse_BilateralFiltered] = myBilateralFiltering(im, im1, sigma, sigma_intensity);
+rmse_BilateralFiltered
 
 %% Poisson Distributed Noise
 % The first case is much better than the second case where im has been divided by 20.
