@@ -35,7 +35,7 @@ function rmse = myPCADenoising2(im, im1, patch_size, sigma, poisson_check)
 			[W,D] = eig(Q*Q');
 			alpha = W'*Q;
 			alpha_mean = max(0, diag(alpha*alpha')/K - sigma*sigma);
-			alpha_check = (((alpha_mean/sigma*sigma).^(-1))+1).^(-1);
+			alpha_check = (((alpha_mean/(sigma*sigma)).^(-1))+1).^(-1);
 			alpha_denoised = diag(alpha_check)*alpha(:, 1);
 
 			P_reconstruct(:, z) = W*alpha_denoised;
