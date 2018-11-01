@@ -1,4 +1,4 @@
-function rmse = myPCADenoising2(im1, patch_size, sigma)
+function rmse = myPCADenoising2(im, im1, patch_size, sigma, poisson_check)
 	[rows, cols] = size(im1);
 	m = rows - patch_size + 1;
 	n = cols - patch_size + 1;
@@ -9,7 +9,7 @@ function rmse = myPCADenoising2(im1, patch_size, sigma)
 
 	for i = 1:m
 		for j = 1:n
-			P(:, (i-1)*n + j) = reshape(im1(i:i + patch_size - 1, j:j + patch_size - 1), [], 1);
+			P(:, (i - 1)*n + j) = reshape(im1(i:i + patch_size - 1, j:j + patch_size - 1), [], 1);
 		end
 	end
 
@@ -18,7 +18,7 @@ function rmse = myPCADenoising2(im1, patch_size, sigma)
 
 	for i = 1:m
 		for j = 1:n
-			z = (i - 1)*n+j;
+			z = (i - 1)*m + j;
 			x_min = max(1, i - 15);
 			x_max = min(m, i + 15);
 			y_min = max(1, j - 15);
@@ -50,12 +50,43 @@ function rmse = myPCADenoising2(im1, patch_size, sigma)
 	end
 
 	im2 = im2_a./im2_b;
-	subplot(1, 2, 1);
-	imshow(im1/255);
-	subplot(1, 2, 2);
-	imshow(im2/255);
+
+	if poisson_check == 1
+		im2 = im2.^2;
+	elseif poisson_check == 2
+		im2 = (im2.^2)*20;
+	end
 
 	dif = double(im2) - double(im);
 	dif = dif.*dif;
 	rmse = sqrt(sum(dif(:))/(rows*cols));
+
+	figure;
+	
+	subplot(1, 2, 1);
+	
+	if poisson_check == 1
+		imshow((im1.^2)/255);
+	elseif poisson_check == 2
+		imshow((im1.^2)*20/255);
+	else
+		imshow(im1/255);
+	end
+
+	if poisson_check == 0
+		title('Noised Image');
+	else
+		title('Noised Image | Poisson');
+	end
+
+	subplot(1, 2, 2);
+	imshow(im2/255);
+
+	if poisson_check == 1
+		title(['PCA Denoised2 | Poisson1 Image | rmse = ', num2str(rmse)]);
+	elseif poisson_check == 2
+		title(['PCA Denoised2 | Poisson2 Image | rmse = ', num2str(rmse)]);
+	else
+		title(['PCA Denoised2 Image | rmse = ', num2str(rmse)]);
+	end
 end

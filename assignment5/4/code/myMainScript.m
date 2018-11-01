@@ -1,4 +1,8 @@
 %% MyMainScript
+% In case of Ideal Low Pass Filter, ring artifacts are observed
+% unlike as in Gaussian Filter. This is because low pass filter
+% removes all the high frequency signals while in gaussian filter
+% they only get weakened and not totally removed.
 
 tic;
 
